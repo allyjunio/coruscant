@@ -1,3 +1,4 @@
+id, user_id, bullying_traces, type, form, teasing, author_role, emotion
 105730486382497793,322329899,"y","self-disclosure","other","n","victim","none"
 107688644067856384,185389094,"y","self-disclosure","other","n","defender","empathy"
 108654820042354688,361869056,"n","NA","NA","NA","NA","NA"

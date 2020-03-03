@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  #Frontend Angular 9
+  coruscant-web:
+    container_name: coruscant-web
+    build:
+      context: .
+      args:
+        buildno: 1
+    image: coruscant-web:latest
+    ports:
+      - '80:80'
+    networks:
+      - network
+networks:
+  network:
+    driver: bridge

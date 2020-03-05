@@ -94,6 +94,7 @@ async def analyze(request):
     pred_class, pred_idx, outputs = learner.predict(text_data['text'])
     return JSONResponse({'result': pred_class.obj})
 
+
 if __name__ == '__main__':
     if 'serve' in sys.argv:
         uvicorn.run(app=app, host='0.0.0.0', port=5000, log_level="info")

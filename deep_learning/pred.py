@@ -1,11 +1,36 @@
+import numpy as np
+import pandas as pd
+
+from pathlib import Path
+from typing import *
+
+import torch
+import torch.optim as optim
+
+import gc
+gc.collect()
+
+import fastai
+
+from fastai import *
+from fastai.vision import *
 from fastai.text import *
-from pytorch_pretrained_bert import BertTokenizer
-from pytorch_pretrained_bert.modeling import BertForSequenceClassification
+
 from sklearn.model_selection import train_test_split
 
-gc.collect()
-bert_tok = BertTokenizer.from_pretrained("bert-base-uncased")
+from torchvision.models import *
+import pretrainedmodels
 
+import sys
+
+from fastai.callbacks.tracker import EarlyStoppingCallback
+from fastai.callbacks.tracker import SaveModelCallback
+
+from pytorch_pretrained_bert.modeling import BertConfig, BertForSequenceClassification, BertForNextSentencePrediction, \
+    BertForMaskedLM
+from pytorch_pretrained_bert import BertTokenizer
+
+bert_tok = BertTokenizer.from_pretrained("bert-base-uncased")
 
 class FastAiBertTokenizer(BaseTokenizer):
     """Wrapper around BertTokenizer to be compatible with fast.ai"""
@@ -21,8 +46,7 @@ class FastAiBertTokenizer(BaseTokenizer):
         """Limits the maximum sequence length"""
         return ["[CLS]"] + self._pretrained_tokenizer.tokenize(t)[:self.max_seq_len - 2] + ["[SEP]"]
 
-
-DATA_ROOT = Path("..") / "api/app/dataset/jigsaw"
+DATA_ROOT = Path("..") / "dataset/jigsaw"
 
 train, test = [pd.read_csv(DATA_ROOT / fname) for fname in ["train.csv", "test.csv"]]
 train, val = train_test_split(train, shuffle=True, test_size=0.2, random_state=42)
@@ -62,7 +86,7 @@ learner = Learner(
     loss_func=loss_func, model_dir='model', metrics=acc_02,
 )
 
-learner.load('BERT_final')
+learner.load('head-2')
 
 # We will now unfreeze the entire model and train it
 learner.unfreeze()

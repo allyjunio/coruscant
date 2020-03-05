@@ -2,9 +2,6 @@
 /.idea/
 /out/production/coruscant/
 /api/app/dataset/jigsaw/*.csv
-/deep_learning/model/BERT_final.pth
-/deep_learning/model/BERT_first.pth
-/deep_learning/model/tmp.pth
-/api/app/model/BERT_final.pth
-/api/app/dataset/jigsaw/test.csv
-/api/app/dataset/jigsaw/train.csv
+/deep_learning/model/*.pth
+/api/app/model/*.pth
+/api/app/dataset/jigsaw/*.csv

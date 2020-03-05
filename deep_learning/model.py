@@ -1,36 +1,25 @@
+import fastai
+import gc
 import numpy as np
 import pandas as pd
-
-from pathlib import Path
-from typing import *
-
+import pretrainedmodels
+import sys
 import torch
 import torch.optim as optim
-
-import gc
-
-gc.collect()
-
-import fastai
-
 from fastai import *
-from fastai.vision import *
-from fastai.text import *
-
-from sklearn.model_selection import train_test_split
-
-from torchvision.models import *
-import pretrainedmodels
-
-import sys
-
 from fastai.callbacks.tracker import EarlyStoppingCallback
 from fastai.callbacks.tracker import SaveModelCallback
-
+from fastai.text import *
+from fastai.vision import *
+from pathlib import Path
+from pytorch_pretrained_bert import BertTokenizer
 from pytorch_pretrained_bert.modeling import BertConfig, BertForSequenceClassification, BertForNextSentencePrediction, \
     BertForMaskedLM
-from pytorch_pretrained_bert import BertTokenizer
+from sklearn.model_selection import train_test_split
+from torchvision.models import *
+from typing import *
 
+gc.collect()
 bert_tok = BertTokenizer.from_pretrained("bert-base-uncased")
 
 
@@ -49,7 +38,7 @@ class FastAiBertTokenizer(BaseTokenizer):
         return ["[CLS]"] + self._pretrained_tokenizer.tokenize(t)[:self.max_seq_len - 2] + ["[SEP]"]
 
 
-DATA_ROOT = Path("..") / "dataset/jigsaw"
+DATA_ROOT = Path("..") / "api/dataset/jigsaw"
 
 train, test = [pd.read_csv(DATA_ROOT / fname) for fname in ["train.csv", "test.csv"]]
 train, val = train_test_split(train, shuffle=True, test_size=0.2, random_state=42)

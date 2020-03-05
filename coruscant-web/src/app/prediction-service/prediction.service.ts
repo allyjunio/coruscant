@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {tap} from 'rxjs/operators';
 import {Observable} from "rxjs";
 import {Prediction} from "../model/prediction";
+import {Search} from "../model/search";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class PredictionService {
   constructor(private http: HttpClient) {
   }
 
-  getPredictions(data: Prediction): Observable<Prediction> {
+  getPredictions(data: Search): Observable<Prediction> {
     return this.http.post<Prediction>(this.apiUrl, data).pipe(
       tap(res => res, error => this.handleError(error)));
   }

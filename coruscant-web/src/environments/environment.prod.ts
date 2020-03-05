@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlEndPoint: 'http://localhost/pred',
+  urlEndPoint: 'http://localhost:3000/pred',
 };

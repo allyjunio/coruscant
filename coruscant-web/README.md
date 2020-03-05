@@ -20,3 +20,5 @@
 - *Stop all services started*: `docker-compose down`
 
 ![alt text](screen-shot.jpg)
+
+![alt text](screen-shot2.jpg)

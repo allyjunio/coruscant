@@ -8,9 +8,17 @@
 }
 
 .mat-body{
-  width: 500px;
   display: block;
   margin: 30px auto 0;
+  width: 1100px;
+  text-align: center;
+}
+
+.circle-progress{
+  height: 170px !important;
+  width: 170px !important;
+  display: block;
+  float: left;
 }
 
 .button-row button{
@@ -29,6 +37,7 @@
   align-items: center;
   justify-content: center;
 }
+
 
 
 

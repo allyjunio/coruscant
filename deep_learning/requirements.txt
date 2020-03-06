@@ -1,0 +1,3 @@
+pytorch-pretrained-bert==0.6.2
+pretrainedmodels==0.7.4
+fastai==1.0.57

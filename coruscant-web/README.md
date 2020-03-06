@@ -19,6 +19,6 @@
 - *Start and update all services in Docker-compose file*: `docker-compose up --build -d`
 - *Stop all services started*: `docker-compose down`
 
-![alt text](screen-shot.jpg)
+![alt text](image01.jpg)
 
-![alt text](screen-shot2.jpg)
+![alt text](image02.jpg)

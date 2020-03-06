@@ -17,40 +17,27 @@
           *ngIf="!form.get('textSearch').valid && form.get('textSearch').touched">Please type the text to check</span>
       </mat-error>
       <div class="button-row">
-        <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!form.valid">
           <mat-icon>save</mat-icon>
         </button>
       </div>
     </form>
+    <div class="button-row">
+      <button mat-raised-button color="warn" (click)="clearResults()">
+        <mat-icon>clear_all</mat-icon>
+      </button>
+    </div>
   </div>
 
-  <div class="mat-body">
-    <div class="circle-progress" *ngIf="model.toxic >= 0">
-      <circle-progress
-        [percent]="model.toxic*100"
-        [radius]="100"
-        [outerStrokeWidth]="30"
-        [innerStrokeWidth]="5"
-        [outerStrokeColor]="'#3F51B5'"
-        [innerStrokeColor]="'#4070FF'"
-        [unitsFontSize]="15"
-        [titleFontSize]="25"
-        [subtitleFontSize]="25"
-        [subtitle]="'Toxic'"
-        [animation]="true"
-        [animationDuration]="300"
-        [responsive]="true"
-      ></circle-progress>
-    </div>
-
+  <div class="mat-body" *ngIf="showResults">
     <div class="circle-progress" *ngIf="model.severe_toxic >= 0">
       <circle-progress
         [percent]="model.severe_toxic*100"
         [radius]="100"
         [outerStrokeWidth]="30"
         [innerStrokeWidth]="5"
-        [outerStrokeColor]="'#3F51B5'"
-        [innerStrokeColor]="'#4070FF'"
+        [outerStrokeColor]="'#380071'"
+        [innerStrokeColor]="'#3F51B5'"
         [unitsFontSize]="15"
         [titleFontSize]="25"
         [subtitleFontSize]="25"
@@ -58,6 +45,32 @@
         [animation]="true"
         [animationDuration]="300"
         [responsive]="true"
+        [unitsColor]="'#FF0000'"
+        [titleColor]="'#FF0000'"
+        [subtitleColor]="'#FF0000'"
+        [titleFontWeight]="'bold'"
+      ></circle-progress>
+    </div>
+
+    <div class="circle-progress" *ngIf="model.toxic >= 0">
+      <circle-progress
+        [percent]="model.toxic*100"
+        [radius]="100"
+        [outerStrokeWidth]="30"
+        [innerStrokeWidth]="5"
+        [outerStrokeColor]="'#830081'"
+        [innerStrokeColor]="'#3F51B5'"
+        [unitsFontSize]="15"
+        [titleFontSize]="25"
+        [subtitleFontSize]="25"
+        [subtitle]="'Toxic'"
+        [animation]="true"
+        [animationDuration]="300"
+        [responsive]="true"
+        [unitsColor]="'#FF0000'"
+        [titleColor]="'#FF0000'"
+        [subtitleColor]="'#FF0000'"
+        [titleFontWeight]="'bold'"
       ></circle-progress>
     </div>
 
@@ -67,8 +80,8 @@
         [radius]="100"
         [outerStrokeWidth]="30"
         [innerStrokeWidth]="5"
-        [outerStrokeColor]="'#3F51B5'"
-        [innerStrokeColor]="'#4070FF'"
+        [outerStrokeColor]="'#830044'"
+        [innerStrokeColor]="'#3F51B5'"
         [unitsFontSize]="15"
         [titleFontSize]="25"
         [subtitleFontSize]="25"
@@ -76,16 +89,21 @@
         [animation]="true"
         [animationDuration]="300"
         [responsive]="true"
+        [unitsColor]="'#FF0000'"
+        [titleColor]="'#FF0000'"
+        [subtitleColor]="'#FF0000'"
+        [titleFontWeight]="'bold'"
       ></circle-progress>
     </div>
+
     <div class="circle-progress" *ngIf="model.obscene >= 0">
       <circle-progress
         [percent]="model.obscene*100"
         [radius]="100"
         [outerStrokeWidth]="30"
         [innerStrokeWidth]="5"
-        [outerStrokeColor]="'#3F51B5'"
-        [innerStrokeColor]="'#4070FF'"
+        [outerStrokeColor]="'#CA5900'"
+        [innerStrokeColor]="'#3F51B5'"
         [unitsFontSize]="15"
         [titleFontSize]="25"
         [subtitleFontSize]="25"
@@ -93,16 +111,21 @@
         [animation]="true"
         [animationDuration]="300"
         [responsive]="true"
+        [unitsColor]="'#FF0000'"
+        [titleColor]="'#FF0000'"
+        [subtitleColor]="'#FF0000'"
+        [titleFontWeight]="'bold'"
       ></circle-progress>
     </div>
+
     <div class="circle-progress" *ngIf="model.threat >= 0">
       <circle-progress
         [percent]="model.threat*100"
         [radius]="100"
         [outerStrokeWidth]="30"
         [innerStrokeWidth]="5"
-        [outerStrokeColor]="'#3F51B5'"
-        [innerStrokeColor]="'#4070FF'"
+        [outerStrokeColor]="'#B6005A'"
+        [innerStrokeColor]="'#3F51B5'"
         [unitsFontSize]="15"
         [titleFontSize]="25"
         [subtitleFontSize]="25"
@@ -110,16 +133,21 @@
         [animation]="true"
         [animationDuration]="300"
         [responsive]="true"
+        [unitsColor]="'#FF0000'"
+        [titleColor]="'#FF0000'"
+        [subtitleColor]="'#FF0000'"
+        [titleFontWeight]="'bold'"
       ></circle-progress>
     </div>
+
     <div class="circle-progress" *ngIf="model.insult >= 0">
       <circle-progress
         [percent]="model.insult*100"
         [radius]="100"
         [outerStrokeWidth]="30"
         [innerStrokeWidth]="5"
-        [outerStrokeColor]="'#3F51B5'"
-        [innerStrokeColor]="'#4070FF'"
+        [outerStrokeColor]="'#FFBF00'"
+        [innerStrokeColor]="'#3F51B5'"
         [unitsFontSize]="15"
         [titleFontSize]="25"
         [subtitleFontSize]="25"
@@ -127,6 +155,10 @@
         [animation]="true"
         [animationDuration]="300"
         [responsive]="true"
+        [unitsColor]="'#FF0000'"
+        [titleColor]="'#FF0000'"
+        [subtitleColor]="'#FF0000'"
+        [titleFontWeight]="'bold'"
       ></circle-progress>
     </div>
   </div>

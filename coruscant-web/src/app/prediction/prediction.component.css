@@ -21,6 +21,10 @@
   float: left;
 }
 
+.button-row{
+  margin-top: 10px;
+}
+
 .button-row button{
   width: 100%;
 }

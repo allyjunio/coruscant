@@ -1,15 +1,17 @@
 import uvicorn
 from fastai.text import *
 from fastai.vision import *
+from fastapi import FastAPI
 from pytorch_pretrained_bert import BertTokenizer
 from pytorch_pretrained_bert.modeling import BertForSequenceClassification
 from sklearn.model_selection import train_test_split
-from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
+from starlette.requests import Request
 from starlette.responses import HTMLResponse, JSONResponse
+from starlette.responses import Response
 from starlette.staticfiles import StaticFiles
-from flask import jsonify
 
+gc.collect()
 bert_tok = BertTokenizer.from_pretrained("bert-base-uncased")
 
 
@@ -39,6 +41,7 @@ fastai_tokenizer = Tokenizer(tok_func=FastAiBertTokenizer(bert_tok, max_seq_len=
 # Now, we can create our Databunch. Important thing to note here is to use BERT Tokenizer, BERT Vocab. And to and put
 # include_bos and include_eos as False as Fastai puts some default values for these
 label_cols = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
+label_val = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
 
 databunch_1 = TextDataBunch.from_df(".", train, val,
                                     tokenizer=fastai_tokenizer,
@@ -47,7 +50,7 @@ databunch_1 = TextDataBunch.from_df(".", train, val,
                                     include_eos=False,
                                     text_cols="comment_text",
                                     label_cols=label_cols,
-                                    bs=8,
+                                    bs=10,
                                     collate_fn=partial(pad_collate, pad_first=False, pad_idx=0),
                                     )
 
@@ -63,21 +66,38 @@ model = bert_model_class
 # learner function
 learner = Learner(
     databunch_1, model,
-    loss_func=loss_func, model_dir='models', metrics=acc_02,
+    loss_func=loss_func, model_dir='model', metrics=acc_02,
 )
 
-learner.load('final_model')
+learner.load('BERT_final')
 
 # We will now unfreeze the entire model and train it
 learner.unfreeze()
 learner.lr_find()
 
-gc.collect()
-path = Path(__file__).parent
 
-app = Starlette()
-app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
-app.mount('/static', StaticFiles(directory='app/static'))
+path = Path(__file__).parent
+app = FastAPI()
+
+
+async def catch_exceptions_middleware(request: Request, call_next):
+    try:
+        return await call_next(request)
+    except Exception:
+        # you probably want some kind of logging here
+        return Response("Internal server error", status_code=500)
+
+
+app.middleware('http')(catch_exceptions_middleware)
+app.mount('/static', StaticFiles(directory='static'))
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.route('/')
@@ -88,12 +108,21 @@ async def homepage(request):
 
 @app.route('/analyze', methods=['POST'])
 async def analyze(request):
-    text_data = await request.form()
-    print(text_data['text'])
-    # prediction = learn.predict(img)[0]
-    pred_class, pred_idx, outputs = learner.predict(text_data['text'])
-    return JSONResponse({'result': pred_class.obj})
+    text_data = await request.json()
+    # print(text_data['textSearch'])
+    pred_class, pred_idx, percentages = learner.predict(text_data['textSearch'])
+
+    pred_idx = pred_idx.cpu().numpy()
+    percentages = percentages.cpu().numpy()
+    res = {}
+    for idx, lab in enumerate(label_cols):
+        if int(pred_idx[idx]) == 1:
+            res[lab] = percentages[idx] * 100
+        else:
+            res[lab] = 0
+
+    return JSONResponse(res)
+
 
 if __name__ == '__main__':
-    if 'serve' in sys.argv:
-        uvicorn.run(app=app, host='0.0.0.0', port=5000, log_level="info")
+    uvicorn.run(app=app, host='0.0.0.0', port=5000, log_level="info")

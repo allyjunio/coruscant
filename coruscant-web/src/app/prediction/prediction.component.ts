@@ -14,13 +14,12 @@ export class PredictionComponent implements OnInit {
   form: FormGroup;
   isLoadingResults = true;
   model: Prediction;
-
+  showResults: boolean;
   constructor(private formBuilder: FormBuilder, private service: PredictionService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.isLoadingResults = false;
     this.model = new Prediction();
-    this.model.response = true;
     this.form = this.formBuilder.group({
       textSearch: [null, Validators.required]
     });
@@ -31,6 +30,7 @@ export class PredictionComponent implements OnInit {
     this.service.getPredictions(this.form.value).subscribe(
       res => {
         this.model = res;
+        this.showResults = true;
         this.isLoadingResults = false;
       },
       err => {
@@ -38,6 +38,11 @@ export class PredictionComponent implements OnInit {
         this.openSnackBar(err.message, 'Error');
       }
     );
+  }
+
+  clearResults(){
+    this.showResults = false;
+    this.form.get('textSearch').setValue(null);
   }
 
   openSnackBar(message: any, action: string) {

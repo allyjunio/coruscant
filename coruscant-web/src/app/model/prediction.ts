@@ -1,6 +1,8 @@
 export class Prediction {
-  id: number;
-  textSearch: string;
-  response: boolean;
-  checked: boolean;
+  toxic: number;
+  severe_toxic: number;
+  obscene: number;
+  threat: number;
+  insult: number;
+  identity_hate: number;
 }

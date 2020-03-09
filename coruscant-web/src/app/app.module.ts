@@ -19,6 +19,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {NgCircleProgressModule} from "ng-circle-progress";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,17 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     MatSnackBarModule,
     MatSidenavModule,
     MatToolbarModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#3F51B5",
+      innerStrokeColor: "#C7E596",
+      subtitleColor: "#3F51B5",
+      subtitleFontWeight: "bold",
+      animationDuration: 300
+    })
   ],
   exports: [MatToolbarModule],
   providers: [],

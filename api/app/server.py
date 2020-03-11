@@ -30,7 +30,7 @@ class FastAiBertTokenizer(BaseTokenizer):
         return ["[CLS]"] + self._pretrained_tokenizer.tokenize(t)[:self.max_seq_len - 2] + ["[SEP]"]
 
 
-DATA_ROOT = Path("dataset") / "jigsaw"
+DATA_ROOT = Path("app/dataset") / "jigsaw"
 
 train, test = [pd.read_csv(DATA_ROOT / fname) for fname in ["train.csv", "test.csv"]]
 train, val = train_test_split(train, shuffle=True, test_size=0.2, random_state=42)
@@ -66,7 +66,7 @@ model = bert_model_class
 # learner function
 learner = Learner(
     databunch_1, model,
-    loss_func=loss_func, model_dir='model', metrics=acc_02,
+    loss_func=loss_func, model_dir='app/model', metrics=acc_02,
 )
 
 learner.load('BERT_final')
@@ -89,7 +89,7 @@ async def catch_exceptions_middleware(request: Request, call_next):
 
 
 app.middleware('http')(catch_exceptions_middleware)
-app.mount('/static', StaticFiles(directory='static'))
+app.mount('/static', StaticFiles(directory='app/static'))
 
 app.add_middleware(
     CORSMiddleware,

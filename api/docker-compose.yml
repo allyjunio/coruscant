@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  # Flask API
+  coruscant-api:
+    container_name: coruscant-api
+    build:
+      context: .
+      args:
+        buildno: 1
+    image: coruscant-api:latest
+    ports:
+      - '5000:5000'
+    networks:
+      - network
+networks:
+  network:
+    driver: bridge

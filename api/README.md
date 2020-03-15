@@ -1,4 +1,4 @@
-# Starter for deploying [fast.ai](https://www.fast.ai) models on [Render](https://render.com)
+# Coruscant API
 
 This folder contains the API used to process the posts, apply the Deep Learning model and then return the results.
 

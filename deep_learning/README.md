@@ -1,6 +1,8 @@
 # Coruscant model
 
-This repo can be used to generate the coruscant model.
+This repo contains the [https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270](BERT Machine Learning model) used to generate the Offensiveness Scores identified by Coruscant.
+
+## How To Use The Model
 
 To generate the model you should execute the command below
 

@@ -16,4 +16,4 @@ Each one off these project has guidance how to use them in their readmes files.
 
 Below you can see what's our idea and how this can be apply to Facebook
 
-![alt text](f8hackaton.png)
+![alt text](how-coruscant-works.png)

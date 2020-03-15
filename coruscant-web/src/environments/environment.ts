@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlEndPoint: 'http://localhost:3000/pred',
+  urlEndPoint: 'http://localhost:5000/analyze',
 };
 
 /*

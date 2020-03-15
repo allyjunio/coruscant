@@ -4,3 +4,4 @@
 /deep_learning/model/*.pth
 /api/app/model/*.pth
 /api/app/dataset/jigsaw/*.csv
+/deep_learning/generic/models/

@@ -2,6 +2,8 @@
 
 [![Angular](https://img.shields.io/badge/Angular-9.0.0-DD0031.svg)](https://angular.io/)
 
+This folder contains the front end application used to simulate the Facebook User Interface.
+
 ### Set up dependencies before test
 * Install Node 10+ (Required)
 * Install Docker 19+ (Not required)

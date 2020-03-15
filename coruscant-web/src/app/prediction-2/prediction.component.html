@@ -7,26 +7,24 @@
   <div class="mat-form-field">
     <form [formGroup]="form" class="form" (ngSubmit)="onFormSubmit()">
       <mat-form-field class="full-width">
-        <mat-label>Type text to analyse</mat-label>
+        <mat-label>Text to search bi</mat-label>
         <textarea formControlName="textSearch" #textSearch maxlength="500" matInput
-                  placeholder="Type the text to analyze"></textarea>
+                  placeholder="Type the text"></textarea>
         <mat-hint align="end">{{textSearch.value.length}} / 500</mat-hint>
       </mat-form-field>
       <mat-error>
         <span
-          *ngIf="!form.get('textSearch').valid && form.get('textSearch').touched">Please type the text to analyze</span>
+          *ngIf="!form.get('textSearch').valid && form.get('textSearch').touched">Please type the text to check</span>
       </mat-error>
       <div class="button-row">
         <button type="submit" mat-raised-button color="primary" [disabled]="!form.valid">
-          Analyze
-          <mat-icon>filter_list</mat-icon>
+          <mat-icon>save</mat-icon>
         </button>
       </div>
     </form>
     <div class="button-row">
       <button mat-raised-button color="warn" (click)="clearResults()">
-        Clear
-        <mat-icon>clear</mat-icon>
+        <mat-icon>clear_all</mat-icon>
       </button>
     </div>
   </div>
@@ -43,7 +41,7 @@
         [unitsFontSize]="15"
         [titleFontSize]="25"
         [subtitleFontSize]="25"
-        [subtitle]="'Aggression'"
+        [subtitle]="'Severe Toxic'"
         [animation]="true"
         [animationDuration]="300"
         [responsive]="true"
@@ -131,7 +129,7 @@
         [unitsFontSize]="15"
         [titleFontSize]="25"
         [subtitleFontSize]="25"
-        [subtitle]="'Threat'"
+        [subtitle]="'Thread'"
         [animation]="true"
         [animationDuration]="300"
         [responsive]="true"

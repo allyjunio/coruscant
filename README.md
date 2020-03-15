@@ -1,6 +1,6 @@
 # Coruscant 
 
-This repo contain the three projects we've created for the f8hackaton.
+This repo contain the three projects we've created for the f8hackathon.
 
 These projects is divided in:
 

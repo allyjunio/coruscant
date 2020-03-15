@@ -4,11 +4,11 @@ This repo contain the three projects we've created for the f8hackaton.
 
 These projects is divided in:
 
-1. api
+1. [api project](api)
     - Project to expose the model as api
-2. coruscan-web
+2. [coruscan-web project](coruscan-web)
     - GUI to prove user friendly access to the model.
-3. deep_learning
+3. [deep learning project](deep_learning)
     - Project to train and save the deep learning model to be uses by the api
 
 

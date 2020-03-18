@@ -2,7 +2,7 @@
 
 This repo contain the three projects we've created for the f8hackathon.
 
-You can try out the demo app at: http://ec2-34-248-111-121.eu-west-1.compute.amazonaws.com/
+You can try out the demo app at: http://ec2-18-203-69-97.eu-west-1.compute.amazonaws.com/
 
 ## Project Structure
 
